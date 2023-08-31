@@ -23,7 +23,7 @@ cd $project
 # Configure service file
 http_upgrade='$http_upgrade'
 host='$host'
-cat <<EOF >"/etc/nginx/sites-enabled/${filename}"
+cat <<EOF >"/etc/nginx/sites-enabled/${server_name}"
 server {
         listen 80;
         listen [::]:80;
