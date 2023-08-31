@@ -4,18 +4,16 @@
 json_file="data.json"
 
 # Parse JSON using jq
-repository=$(jq -r '.project.repository' "$json_file")
-project=$(jq -r '.project.name' "$json_file")
-
-filename=$(jq -r '.configuration.filename' "$json_file")
-server_name=$(jq -r '.configuration.server_name' "$json_file")
-port=$(jq -r '.configuration.port' "$json_file")
+repository=$(jq -r '.repository' "$json_file")
+project=$(basename "$repository" .git)
+url=$(jq -r '.url' "$json_file")
+port=$(jq -r '.port' "$json_file")
 
 # Enter to /var/www/
 cd /var/www/
 
 # Clone repository
-git clone $repository $project
+git clone $repository
 
 # Enter to project
 cd $project
@@ -23,14 +21,14 @@ cd $project
 # Configure service file
 host='$host'
 remote_addr='$remote_addr'
-cat <<EOF >"/etc/nginx/sites-enabled/${server_name}"
+cat <<EOF >"/etc/nginx/sites-enabled/${project}"
 server {
         listen 80;
         listen [::]:80;
 
         root /var/www/$project;
 
-        server_name $server_name;
+        server_name $url;
 
         location / {
                 proxy_pass http://localhost:$port;

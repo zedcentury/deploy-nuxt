@@ -1,4 +1,4 @@
 #!/bin/bash
 
 apt update
-apt install nodejs npm nginx
+apt install nodejs npm nginx jq
