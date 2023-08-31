@@ -21,7 +21,7 @@ git clone $repository $project
 cd $project
 
 # Configure service file
-cat <<EOF >"/etc/nginx/site-enabled/${filename}"
+cat <<EOF >"/etc/nginx/sites-enabled/${filename}"
 server {
         listen 80;
         listen [::]:80;
