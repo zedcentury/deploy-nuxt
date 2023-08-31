@@ -1,0 +1,14 @@
+{
+  "project": {
+    "repository": "git@github.com:Asliddin750750/example-nuxt-project.git",
+    "name": "exampleNuxtProject",
+    "env": {
+      "PORT": 3005
+    }
+  },
+  "configuration": {
+    "filename": "example-nuxt-project",
+    "server_name": "example-nuxt.lurny.co",
+    "port": 3005
+  }
+}
