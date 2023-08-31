@@ -21,25 +21,21 @@ git clone $repository $project
 cd $project
 
 # Configure service file
-http_upgrade='$http_upgrade'
 host='$host'
+remote_addr='$remote_addr'
 cat <<EOF >"/etc/nginx/sites-enabled/${server_name}"
 server {
         listen 80;
         listen [::]:80;
 
         root /var/www/$project;
-        index index.html index.htm;
 
         server_name $server_name;
 
         location / {
                 proxy_pass http://localhost:$port;
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection 'upgrade';
                 proxy_set_header Host $host;
-                proxy_cache_bypass $http_upgrade;
+                proxy_set_header X-Real-IP $remote_addr;
         }
 }
 EOF
